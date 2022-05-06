@@ -10,7 +10,7 @@ exports.createUser = (req, res, next) => {
         password: req.body.password
     }
 
-    User.create (newUser, (err, user)=>{
+    user.create (newUser, (err, user)=>{
         if (err) return res.status(500).send('Server error');
         const expiresIn  = 24 * 60;
         const accesToken = jwt.sign({id: user.id},
@@ -29,7 +29,7 @@ exports.loginUser = (req, res, next) => {
         password: req.body.password
     }
     //Busca en la base de datos si existe el usuario
-    User.findOne({email: userData.email}, (err, user) =>{ //Dado por mongoose //err, user "Promesa"
+    user.findOne({email: userData.email}, (err, user) =>{ //Dado por mongoose //err, user "Promesa"
         if (err) return res.status(500).send('Server Error!'); //Si existe error muestra en el frontend status 500
         if (!user){
             //No existe el email
