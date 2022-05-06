@@ -7,18 +7,25 @@ exports.createUser = (req, res, next) => {
     const newUser  = {
         name:     req.body.name,
         email:    req.body.email,
-        password: req.body.password
+        password: bcrypt.hashSync(req.body.password)
     }
-
+    
     user.create (newUser, (err, user)=>{
+        if (err && err.code === 11000) return res.status(409).send('Email already exists.') 
         if (err) return res.status(500).send('Server error');
         const expiresIn  = 24 * 60;
         const accesToken = jwt.sign({id: user.id},
             SECRET_KEY,{
                 expiresIn: expiresIn
             });
+            const dataUser = {
+                name: user.name,
+                email: user.email,
+                accesToken: accesToken,
+                expiresIn: expiresIn
+            }
         //response
-        res.send({ user }); 
+        res.send({ dataUser }); 
     });
 }
 
@@ -35,11 +42,19 @@ exports.loginUser = (req, res, next) => {
             //No existe el email
             res.status(409).send({message: 'Algo salio mal'}); //Si no encuentra el usuario devuelve codigo 409
         }else{
-            const resultPassword = userData.password;
+            const resultPassword = bcrypt.compareSync(userData.password, user.password);
             if(resultPassword){
                 const expiresIn = 24 * 60;
                 const accesToken = jwt.sign({id: user.id}, SECRET_KEY, {expiresIn: expiresIn});
-                res.send({ userData });
+                
+                const dataUser = {
+                    name: user.name,
+                    email: user.email,
+                    accesToken: accesToken,
+                    expiresIn: expiresIn
+                }
+                
+                res.send({ dataUser });
             }else{
                 // Contraseña incorrecta
                 res.status(409).send({message: 'Algo malio sal :C'}); //Contraseña incorrecta envía codigo 409
