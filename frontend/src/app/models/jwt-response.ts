@@ -3,7 +3,7 @@ export interface JwtResponseI {
         id: number, 
         name: string,
         email: string,
-        accesToken: string,
+        accessToken: string,
         expiresIn: string
     }
 }
