@@ -10,7 +10,7 @@ import { UserI } from '../../models/user';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {   }
 
   ngOnInit(): void {
   }
@@ -20,5 +20,4 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/auth/visor');
     })
   }
-
 }
