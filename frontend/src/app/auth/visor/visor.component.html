@@ -1,0 +1,7 @@
+<app-navbar [titulo]="'My News Feed '"></app-navbar>
+<!-- El primer parámetro proviene del Input (listado-noticias.component.ts) -->
+<!-- El segundo parámetro proviene del nombre de la variable del componente padre (app.component.ts)-->
+<div class="container">
+    <app-formulario (parametrosSeleccionados)="buscarNoticias($event)"></app-formulario>
+    <app-listado-noticias [listNoticias]="listNoticias"></app-listado-noticias>
+</div>

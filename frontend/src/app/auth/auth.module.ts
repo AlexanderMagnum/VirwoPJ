@@ -6,9 +6,13 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from '../services/auth.service';
+import { FormularioComponent } from './formulario/formulario.component';
+import { ListadoNoticiasComponent } from './listado-noticias/listado-noticias.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { VisorComponent } from './visor/visor.component';
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent],
+  declarations: [RegisterComponent, LoginComponent, FormularioComponent, ListadoNoticiasComponent, NavbarComponent, VisorComponent],
   imports: [
     CommonModule,
     FormsModule,

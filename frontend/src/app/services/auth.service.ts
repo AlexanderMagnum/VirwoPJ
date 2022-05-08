@@ -11,7 +11,7 @@ export class AuthService {
   private token: any;
   AUTH_SERVER: string = 'http://localhost:3000';
   authSubject = new BehaviorSubject(false);
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     this.token;
   }
 
@@ -54,6 +54,13 @@ export class AuthService {
       this.token = localStorage.getItem("ACCESS_TOKEN");
     }
     return this.token;
+  }
+
+  getNoticias(parametros: any): Observable<any>{
+    const URL = 'https://newsapi.org/v2/top-headlines?country='
+    +parametros.pais +'&category='
+    +parametros.categoria +'&apiKey=f51c6b2a6b494cd586020bbf3d447976';
+    return this.httpClient.get(URL);
   }
 
 }

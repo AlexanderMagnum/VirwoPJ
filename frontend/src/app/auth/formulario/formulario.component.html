@@ -1,0 +1,32 @@
+<div class="jumbotron mt-5">
+    <form (ngSubmit)="buscarNoticia()">
+        <div class="row">
+            <div class="col-lg-3 offset-lg-2 ">
+                <form>
+                    <div class="form-group">
+                        <select name="pais" [(ngModel)]="paisSeleccionado" class="form-control">
+                    <option [value]="pais.value" *ngFor="let pais of paises">{{ pais.nombre }}</option>
+                  </select>
+                    </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-primary">Local (México)</button>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 ">
+                <form>
+                    <div class="form-group">
+                        <select name="categoria" [(ngModel)]="categoriaSeleccionada" class="form-control">
+                  <option [value]="categoria.value" *ngFor="let categoria of categorias">{{ categoria.nombre }}</option>
+                </select>
+                    </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <button type="submit" class="btn btn-success">Buscar</button>
+            </ul>
+        </div>
+    </form>
+</div>
